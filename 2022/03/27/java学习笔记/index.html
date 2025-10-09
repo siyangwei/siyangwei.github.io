@@ -1,0 +1,578 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>java学习笔记 | zero blog</title><meta name="keywords" content="Java"><meta name="author" content="wsy"><meta name="copyright" content="wsy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="引入 JDK、JRE、JVM   1.JDK:英文名称（Java Development Kit）,java开发工具包，JDK是整个java开发的核心，它集成了JRE和一些好用的的小工具。例如：javac.exe,java.exe,jar.exe等。   2.JRE:英文名称（Java Runtime Environment）,java运行时环境，它主要包含两个部分，jvm 的标准实现和 Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java学习笔记">
+<meta property="og:url" content="https://www.weisiyang.top/2022/03/27/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="zero blog">
+<meta property="og:description" content="引入 JDK、JRE、JVM   1.JDK:英文名称（Java Development Kit）,java开发工具包，JDK是整个java开发的核心，它集成了JRE和一些好用的的小工具。例如：javac.exe,java.exe,jar.exe等。   2.JRE:英文名称（Java Runtime Environment）,java运行时环境，它主要包含两个部分，jvm 的标准实现和 Java">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.weisiyang.top/img/pixel/04.webp">
+<meta property="article:published_time" content="2022-03-27T12:56:08.000Z">
+<meta property="article:modified_time" content="2025-10-09T09:47:03.126Z">
+<meta property="article:author" content="wsy">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.weisiyang.top/img/pixel/04.webp"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://www.weisiyang.top/2022/03/27/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/img/pwa/manifest.json"/><link rel="apple-touch-icon" sizes="180x180" href="/img/pwa/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="/img/pwa/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/img/pwa/16.png"/><link rel="mask-icon" href="/img/pwa/safari-pinned-tab.svg" color="#5bbad5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'java学习笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-10-09 17:47:03'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/./img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-folder-open"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zero blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-folder-open"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">java学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-27T12:56:08.000Z" title="发表于 2022-03-27 20:56:08">2022-03-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-09T09:47:03.126Z" title="更新于 2025-10-09 17:47:03">2025-10-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java/">Java</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="java学习笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div><article class="post-content" id="article-container"><h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><ul>
+<li><h2 id="JDK、JRE、JVM"><a href="#JDK、JRE、JVM" class="headerlink" title="JDK、JRE、JVM"></a>JDK、JRE、JVM</h2></li>
+</ul>
+<blockquote>
+<p>1.<strong>JDK</strong>:英文名称（Java Development Kit）,java开发工具包，JDK是整个java开发的核心，它集成了JRE和一些好用的的小工具。例如：javac.exe,java.exe,jar.exe等。</p>
+</blockquote>
+<blockquote>
+<p>2.<strong>JRE</strong>:英文名称（Java Runtime Environment）,java运行时环境，它主要包含两个部分，jvm 的标准实现和 Java 的一些基本类库。它相对于 jvm 来说，多出来的是一部分的 Java 类库。</p>
+</blockquote>
+<blockquote>
+<p>3.<strong>JVM</strong>:英文名称：（Java Virtual Machine）,java虚拟机。它能够将 class 文件中的字节码指令进行识别并调用操作系统向上的 API 完成动作。所以说，jvm 是 Java 能够跨平台的核心。</p>
+</blockquote>
+<p>  三者关系：JDK&gt;JRE&gt;JVM</p>
+<ul>
+<li><h2 id="编译型和解释型"><a href="#编译型和解释型" class="headerlink" title="编译型和解释型"></a>编译型和解释型</h2></li>
+</ul>
+<blockquote>
+<ul>
+<li><strong>编译型语言</strong>：<code>c</code>、<code>c++</code>、<code>Object-c</code>、苹果新语言&#96;&#96;swift,&#96;通常会对源码进行编译，生成可执行的二进制代码，执行的是编译后的结果。</li>
+<li><strong>解释型语言</strong>：<code>Javascript</code>、<code>python</code>、<code>Erlang</code>、<code>PHP</code>、<code>Perl</code>、<code>Ruby</code>,通常不用源码进行编译，一般通过解释器载入脚本后运行。由于每个语句都是执行的时候才进行翻译解释，所以执行效率相对较低，不过现在cpu和硬件都很强大,这个影响可以说很小了。</li>
+<li><code>java</code>具有编译与解释两种特性：既可以将其源代码当作脚本执行，也可以编译成class（字节码）代码运行。</li>
+</ul>
+</blockquote>
+<h2 id="结构化程序设计"><a href="#结构化程序设计" class="headerlink" title="结构化程序设计"></a>结构化程序设计</h2><h3 id="1-标识符"><a href="#1-标识符" class="headerlink" title="1.标识符"></a>1.标识符</h3><ul>
+<li><strong>标识符</strong>：标识名、接口名、变量名、常量名、方法名</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">123</span>;</span><br><span class="line"><span class="type">double</span> = <span class="number">1.0</span>; </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>java标识符定义规则</p>
+<blockquote>
+<ul>
+<li>以字母、下划线_、美元符$开头，后面可以是字母、下划线、美元符$和数字；</li>
+<li>不能使用java关键字；</li>
+<li>标识符区分大小写；</li>
+<li>标识符长度不限</li>
+<li>标识符命名尽量见名知意</li>
+</ul>
+</blockquote>
+</li>
+<li><p><strong>关键字</strong>(keyword)：对编译器有特殊含义的单词，不允许做标识符</p>
+<blockquote>
+<ul>
+<li>数据类型：<code>boolean</code> 、<code>int</code> 、<code>long</code> 、<code>short</code> 、<code>byte</code> 、<code>float</code> 、<code>double</code>、 <code>char</code>、 <code>class</code> 、<code>interface</code></li>
+<li>流程控制：<code>if</code> 、<code>else</code>、<code>do</code>、 <code>while</code> 、<code>while</code>、<code>for</code>、<code>switch</code>、<code>case</code>、<code>default</code>、<code>break</code>、<code>continue</code>、<code>return</code>、<code>try</code>、<code>catch</code>、<code>finally</code></li>
+<li>结构修饰符：<code>public</code>、<code>protected</code>、<code>private</code>、<code>final</code>、<code>void</code>、<code>static</code>、<code>stritfp</code>、<code>abstract</code>、<code>transient</code>、<code>synchronized</code>、<code>volatile</code>、<code>native</code></li>
+<li>动作：<code>package</code>、<code>import</code>、<code>throw</code>、<code>throws</code>、<code>extands</code>、<code>implements</code>、<code>this</code>、<code>super</code>、<code>instantceof</code>、<code>new</code></li>
+<li>值：<code>true</code>、<code>false</code>、<code>null</code></li>
+</ul>
+</blockquote>
+</li>
+<li><p><strong>保留字</strong>(reserved word)：特殊的关键字，现有java版本尚未使用，但以后版本可能作为关键字。</p>
+<blockquote>
+<ul>
+<li><code>goto</code>、<code>const</code></li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<hr>
+<h3 id="2-数据类型"><a href="#2-数据类型" class="headerlink" title="2.数据类型"></a>2.数据类型</h3><ul>
+<li><p>基本数据类型：整数、浮点数、字符、布尔</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>占用位数</th>
+<th>数值范围</th>
+<th>初始值</th>
+<th align="left">标准</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>boolean</strong></td>
+<td>8</td>
+<td>true或false</td>
+<td>false</td>
+<td align="left">ISO Unicode字符集</td>
+</tr>
+<tr>
+<td><strong>char</strong></td>
+<td>16</td>
+<td>’\u0000’到’\uFFFF’</td>
+<td>‘\u0000’</td>
+<td align="left">ISO Unicode字符集</td>
+</tr>
+<tr>
+<td><strong>byte</strong></td>
+<td>8</td>
+<td>从-128到127</td>
+<td>(byte)0</td>
+<td align="left">ISO Unicode字符集</td>
+</tr>
+<tr>
+<td><strong>short</strong></td>
+<td>16</td>
+<td>从-32768(-2^15)到32767(2^15)</td>
+<td>(short)0</td>
+<td align="left">ISO Unicode字符集</td>
+</tr>
+<tr>
+<td><strong>int</strong></td>
+<td>32</td>
+<td>-2^31到2^31-1</td>
+<td>0</td>
+<td align="left">ISO Unicode字符集</td>
+</tr>
+<tr>
+<td><strong>long</strong></td>
+<td>64</td>
+<td>-2^63到2^63-1</td>
+<td>0L</td>
+<td align="left">ISO Unicode字符集</td>
+</tr>
+<tr>
+<td><strong>float</strong></td>
+<td>32</td>
+<td>负数：-3.4028234663852886*10^38到-1.40129846432481707*10^(-45)                 正数：1.40129846432481707*10^(-45)到3.4028234663852886*10^38</td>
+<td>0.0f</td>
+<td align="left">IEEE745标准</td>
+</tr>
+<tr>
+<td><strong>double</strong></td>
+<td>64</td>
+<td>负数：-1.7976931348623157*10^308到-4.94065645841246544*10^(-324)            正数：4.94065645841246544*10^(-324) 到1.7976931348623157*10^308</td>
+<td>0.0d</td>
+<td align="left">IEEE745标准</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>引用数据类型：类、接口和数组。</p>
+</li>
+</ul>
+<hr>
+<h3 id="3-运算符"><a href="#3-运算符" class="headerlink" title="3.运算符"></a>3.运算符</h3><ul>
+<li><p>算数运算符：+ 、-、*、&#x2F;、++、–、%</p>
+<blockquote>
+<p>算数表达式中<strong>包含多个基本数据类型</strong>的值时，整个算数表达式的<strong>类型</strong>会<strong>自动进行提升</strong></p>
+</blockquote>
+<blockquote>
+<p>等级顺序：<code>byte``short``char</code>–&gt;<code>int</code>–&gt;<code>long</code>–&gt;<code>float</code>–&gt;<code>double</code></p>
+</blockquote>
+</li>
+<li><p>关系运算符：&lt;、&lt;&#x3D;、&gt;、&gt;&#x3D;、&#x3D;&#x3D;、!&#x3D;</p>
+</li>
+<li><p>布尔逻辑运算符：&amp;&amp;、&amp;、||、|、！、^</p>
+<blockquote>
+<p><strong>&amp;&amp;和||相比于&amp;和| 拥有短路的特性</strong></p>
+</blockquote>
+</li>
+<li><p>赋值运算符：&#x3D;、+&#x3D;、-&#x3D;、*&#x3D;、&#x2F;&#x3D;、%&#x3D;、&lt;&lt;&#x3D;、&gt;&gt;&#x3D;、&gt;&gt;&gt;&#x3D;</p>
+<blockquote>
+<p><strong>扩展的赋值运算符(+&#x3D;之类)隐含了强制类型转换</strong></p>
+</blockquote>
+</li>
+<li><p>条件运算符：x ?  y:z    (x为真执行y,否则执行z)</p>
+</li>
+<li><p>其他运算符：<code>（类型）</code>、<code>.  </code>、<code>[]</code>、<code>（）</code>、<code>instanceof</code>、<code>new</code></p>
+</li>
+<li><p>位运算：&amp;、|、~、&gt;&gt;、&gt;&gt;&gt;、&lt;&lt;</p>
+</li>
+</ul>
+<blockquote>
+<p>A&#x3D;0011 1100</p>
+<p>B&#x3D;0000 1101</p>
+<p><strong>与</strong>：A&amp;B  0000 1100</p>
+<p><strong>或</strong>：A|B  0011 1101 </p>
+<p><strong>异或</strong>：A^B  0011 0001</p>
+<p><strong>非</strong>：~B:1111 0010</p>
+<p><strong>右移</strong> ：</p>
+<p>左端高位移入操作数最高位的值</p>
+<p>右端移出的低位自动舍弃</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> v1=<span class="number">0xf0f0f000</span>;对应二进制补码：<span class="number">1111</span> <span class="number">0000</span> <span class="number">1111</span> <span class="number">0000</span> <span class="number">1111</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span></span><br><span class="line"><span class="type">int</span> v2=v1&gt;&gt;<span class="number">4</span>；对应二进制补码：<span class="number">1111</span> <span class="number">1111</span> <span class="number">0000</span> <span class="number">1111</span> <span class="number">0000</span> <span class="number">1111</span> <span class="number">0000</span> <span class="number">0000</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>无符号右移</strong>：</p>
+<p>左端的高位依次补0</p>
+<p>右端的低位自动被舍弃</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> v1=<span class="number">0xf0f0f000</span>;对应二进制补码：<span class="number">1111</span> <span class="number">0000</span> <span class="number">1111</span> <span class="number">0000</span> <span class="number">1111</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span></span><br><span class="line"><span class="type">int</span> v2=v1&gt;&gt;<span class="number">4</span>；对应二进制补码：<span class="number">0000</span> <span class="number">1111</span> <span class="number">0000</span> <span class="number">1111</span> <span class="number">0000</span> <span class="number">1111</span> <span class="number">0000</span> <span class="number">0000</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>左移</strong>：</p>
+<p>左端自动舍弃移出的高位</p>
+<p>右端依次补0</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> v1=<span class="number">0xf0f0f000</span>;对应二进制补码：<span class="number">1111</span> <span class="number">0000</span> <span class="number">1111</span> <span class="number">0000</span> <span class="number">1111</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span></span><br><span class="line"><span class="type">int</span> v2=v1&gt;&gt;<span class="number">4</span>；对应二进制补码：<span class="number">1111</span> <span class="number">0000</span> <span class="number">1111</span> <span class="number">0000</span> <span class="number">1111</span> <span class="number">0000</span> <span class="number">0000</span> <span class="number">0000</span></span><br></pre></td></tr></table></figure>
+
+</blockquote>
+<hr>
+<h3 id="4-控制结构"><a href="#4-控制结构" class="headerlink" title="4.控制结构"></a>4.控制结构</h3><ul>
+<li><p><strong>if语句和if-else语句</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(关系表达式)&#123;</span><br><span class="line">	语句体;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(关系表达式)&#123;</span><br><span class="line">	语句体;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(关系表达式)&#123;</span><br><span class="line">	语句体;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	语句体;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>switch语句</strong>(可配合枚举使用)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(表达式)&#123;</span><br><span class="line"><span class="keyword">case</span> 值<span class="number">1</span>:</span><br><span class="line">	语句体;</span><br><span class="line">	<span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> 值<span class="number">2</span>:</span><br><span class="line">	语句体;</span><br><span class="line">	<span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">	语句体;</span><br><span class="line">	<span class="keyword">break</span>;<span class="comment">//可不写</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>case穿透</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(month)&#123;</span><br><span class="line"><span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">	System.out.println(<span class="string">&quot;春季&quot;</span>)；</span><br><span class="line">	<span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="number">8</span>:</span><br><span class="line">	System.out.println(<span class="string">&quot;夏季&quot;</span>)；</span><br><span class="line">	<span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> <span class="number">9</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="number">10</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="number">11</span>:</span><br><span class="line">	System.out.println(<span class="string">&quot;秋季&quot;</span>)；</span><br><span class="line">	<span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> <span class="number">12</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">	System.out.println(<span class="string">&quot;冬季&quot;</span>)；</span><br><span class="line">	<span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">	<span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>for语句</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*for(初始化语句;条件判断语句;条件控制语句)&#123;</span></span><br><span class="line"><span class="comment">	循环体语句;</span></span><br><span class="line"><span class="comment">&#125;*/</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i;i&lt;=<span class="number">100</span>;i++)&#123;</span><br><span class="line">	System.out.println(<span class="string">&quot;发生什么事了？&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>while语句</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*初始化语句;</span></span><br><span class="line"><span class="comment">while(条件判断语句)&#123;</span></span><br><span class="line"><span class="comment">	循环体语句;</span></span><br><span class="line"><span class="comment">	条件控制语句;</span></span><br><span class="line"><span class="comment">&#125;*/</span></span><br><span class="line"><span class="type">int</span> i=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>(i&lt;=<span class="number">100</span>)&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;发生什么事了？&quot;</span>);</span><br><span class="line">    i++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>do-while语句</p>
+<blockquote>
+<p>相比while循环至少执行依次循环体语句</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*初始化语句;</span></span><br><span class="line"><span class="comment">do&#123;</span></span><br><span class="line"><span class="comment">	循环体语句;</span></span><br><span class="line"><span class="comment">	条件控制语句;</span></span><br><span class="line"><span class="comment">&#125;while(条件判断语句);*/</span></span><br><span class="line"><span class="type">int</span> i=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;发生什么事了？&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">while</span>(i&lt;=<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>break语句</p>
+<blockquote>
+<p>用于强制跳出当前循环，不执行循环中剩余的循环。注意:<strong>如为嵌套循环则只是跳出所位于的那层循环，并不是结束所有循环</strong></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i=<span class="number">0</span>,j=<span class="number">0</span>,k=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">100</span>;i++)</span><br><span class="line">	<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;<span class="number">100</span>;j++)</span><br><span class="line">		<span class="keyword">for</span>(k=<span class="number">0</span>;k&lt;<span class="number">100</span>;k++)</span><br><span class="line">			<span class="keyword">if</span>(i==<span class="number">88</span>&amp;&amp;j==<span class="number">88</span>&amp;&amp;k==<span class="number">88</span>)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line"><span class="comment">//i=100,j=100,k=100</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>标点语句</strong>(相当于goto语句)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i=<span class="number">0</span>,j=<span class="number">0</span>,k=<span class="number">0</span>;</span><br><span class="line">lable1:	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">100</span>;i++)</span><br><span class="line">			<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;<span class="number">100</span>;j++)</span><br><span class="line">				<span class="keyword">for</span>(k=<span class="number">0</span>;k&lt;<span class="number">100</span>;k++)</span><br><span class="line">				<span class="keyword">if</span>(i==<span class="number">88</span>&amp;&amp;j==<span class="number">88</span>&amp;&amp;k==<span class="number">88</span>)</span><br><span class="line">				<span class="keyword">break</span> lable1;</span><br><span class="line"><span class="comment">//i=88,j=88,k=88</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>continue语句</p>
+<blockquote>
+<p>停止本次循环，开始下一个循环</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">5</span>;i++)</span><br><span class="line">    <span class="keyword">if</span>(i==<span class="number">3</span>)</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    System.out.println(i+<span class="string">&quot; &quot;</span>);</span><br><span class="line"><span class="comment">//输出：0 1 2 4 5</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>Random</strong></p>
+<blockquote>
+<p>1 .导包</p>
+<p>import java.util.Random</p>
+<p>2.创建对象</p>
+<p>Random r &#x3D; new Random();</p>
+<p>3.获取随机数</p>
+<p>int number &#x3D; r.nextInt(10);&#x2F;&#x2F;0~9的随机数</p>
+</blockquote>
+<hr>
+<h3 id="5-数组"><a href="#5-数组" class="headerlink" title="5.数组"></a>5.数组</h3><ul>
+<li><p>数组的定义格式</p>
+<blockquote>
+<p>数据类型[] 变量名</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] arrays;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>数据类型 变量名[]</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> arrays[];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组的初始化</p>
+<blockquote>
+<p>动态初始化：初始化时只指定数组长度，系统给初值</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] arrays = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>静态初始化：初始化时给定了数组元素值</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] arrays = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>多个数组指向同一个堆</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> array1[] = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">3</span>];</span><br><span class="line">array1[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">array1[<span class="number">1</span>] = <span class="number">2</span>;</span><br><span class="line">array1[<span class="number">2</span>] = <span class="number">3</span>;</span><br><span class="line"><span class="type">int</span> array2[] = array1;<span class="comment">//相当于c语言中进行了指针的复制</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组的两个常见问题</p>
+<blockquote>
+<p>数组越界：ArrayIndexOutOfBoundsException</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> array[] = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">3</span>];</span><br><span class="line">Systemout.println(array[<span class="number">3</span>]);<span class="comment">//数组最大下标为2</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>空指针异常：访问的数组(引用类型)不再指向堆<br>NullPointerException</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> array[] = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">3</span>];</span><br><span class="line">array = <span class="literal">null</span>;</span><br><span class="line">Systemout.println(array[<span class="number">2</span>]);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="String类"><a href="#String类" class="headerlink" title="String类"></a>String类</h1><ul>
+<li><strong>字符串特点</strong></li>
+</ul>
+<blockquote>
+<ul>
+<li>字符串不可变，它们的值在创建后不能被更改</li>
+<li>虽然String的值十分不可改变的，但是它们可以被共享</li>
+<li>字符串效果上相当于字符数组（char[]）,但是底层原理是字节数组(byte[])</li>
+</ul>
+</blockquote>
+<p><strong>String类的构造方法</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public String()</td>
+<td>创建一个空白字符串对象，不含有任何内容</td>
+</tr>
+<tr>
+<td>public String (char[] chs)</td>
+<td>根据字符数组内容，来创建字符串对象</td>
+</tr>
+<tr>
+<td>public String (byte[] bys)</td>
+<td>根据字节数组的内容，来创建字符串对象</td>
+</tr>
+<tr>
+<td>String s &#x3D; “abc”</td>
+<td>直接赋值的方式创建字符串对象，内容就是abc</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>String对象的特点</strong></li>
+</ul>
+<p>1）通过new创建的字符串对象，每一次new都会申请一个内存空间，虽然内容相同，但是地址值不同</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span>[] chs = &#123;<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>&#125;;</span><br><span class="line"><span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(chs);</span><br><span class="line"><span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(chs);</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，JVM会首先创建一个字符数组，然后每一次new的时候都会有一个新的地址，只不过s1和s2参考的字符串内容是相同的</p>
+<p>2）以””方式给出的字符串，只要字符序列相同（顺序和大小写），无论在程序代码中出现几次，JVM都只会创建一份String对象，并在字符串池中维护</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="string">&quot;abc&quot;</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">s4</span> <span class="operator">=</span> <span class="string">&quot;abc&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在上面代码中，针对第一行代码，JVM会建立一个String对象存放在字符串池中，并给s3参考；</p>
+<p>第二行则让s4直接参考字符串池中的String对象，也就是说它们本质上是同一个对象</p>
+<ul>
+<li><strong>字符串的比较</strong></li>
+</ul>
+<p>使用<code>==</code>作比较</p>
+<blockquote>
+<ul>
+<li>基本类型：比较的是<strong>数据值</strong>是否相同</li>
+<li>引用类型：比较的是<strong>地址值</strong>是否相同</li>
+</ul>
+</blockquote>
+<p>使用<code>equals</code>方法</p>
+<p>object类的<code>equals</code>方法本来是用<code>==</code>号比较地址值，但是String类重写了<code>equals</code>方法，可用来比较字符串的内容是否相同。</p>
+<ul>
+<li><strong>字符串长度</strong></li>
+</ul>
+<p><code>length()</code>方法，返回字符串的长度，String对象信息的访问器。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="string">&quot;abcd&quot;</span>;</span><br><span class="line">System.out.println(s1.length());</span><br><span class="line"><span class="comment">//运行结果为：4</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>连接字符串</strong></li>
+</ul>
+<p>String类中提供了两种连接字符串的方法</p>
+<blockquote>
+<ul>
+<li><code>s1.concat(s2)</code>,将字符串s1和s2连接</li>
+<li><code>s1``+=``s2</code>,将字符串s1和s2连接</li>
+</ul>
+</blockquote>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;lo&quot;</span>);</span><br><span class="line"><span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;ve&quot;</span>);</span><br><span class="line"><span class="type">String</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="string">&quot;lo&quot;</span>;</span><br><span class="line"><span class="type">string</span> <span class="variable">s4</span> <span class="operator">=</span> <span class="string">&quot;ve&quot;</span>;</span><br><span class="line">System.out.println(s1.concat(s2));</span><br><span class="line">System.out.println(s3+s4);</span><br><span class="line">System.out.println(<span class="string">&quot;lo&quot;</span>+<span class="string">&quot;ve&quot;</span>);</span><br><span class="line"><span class="comment">//运行结果：</span></span><br><span class="line">love</span><br><span class="line">love</span><br><span class="line">love</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>创建格式化字符串</strong></li>
+</ul>
+<p>格式化输出可以使用<code>prinf()</code>和<code>format()</code>方法。</p>
+<p>String类使用静态方法<code>format()</code>返回一个String对象而不是PrintStream对象</p>
+<p>String类的静态方法<code>format()</code>能用来创建可复用的格式化字符串，而不是仅仅是用于一次打印输出</p>
+<p>如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System.out.prinf(<span class="string">&quot;浮点型变量的值为&quot;</span>+</span><br><span class="line"><span class="string">&quot;%f,整形变量的值为 &quot;</span>+</span><br><span class="line"><span class="string">&quot;%d,字符串变量的值为 &quot;</span>+<span class="string">&quot; %s&quot;</span>，f,i,s);</span><br></pre></td></tr></table></figure>
+
+<p>可以写成：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String fs;</span><br><span class="line">fs = String.format(&quot;浮点型变量的值为&quot;+</span><br><span class="line">&quot;%f,整形变量的值为 &quot;+</span><br><span class="line">&quot;%d,字符串变量的值为 &quot;+&quot; %s&quot;，f,i,s);</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><strong>String方法</strong></li>
+</ul>
+<p>参考菜鸟<a target="_blank" rel="noopener" href="https://www.runoob.com/manual/jdk11api/java.base/java/lang/String.html">java String API</a></p>
+<h1 id="StringBuffer和StringBuilder类"><a href="#StringBuffer和StringBuilder类" class="headerlink" title="StringBuffer和StringBuilder类"></a>StringBuffer和StringBuilder类</h1><ul>
+<li><strong>StringBuffer和StringBuilder类简介</strong></li>
+</ul>
+<p>当对字符串进行修改时，需使用StringBuffer和StringBuiler类。</p>
+<p>和String类不同的是，StringBuffer和StringBuilder类的对象能被多次修改，并且不产生新的未使用对象。</p>
+<p>在使用StringBuffer类时，每次都会对StringBuffer对象本身进行操作，而不是生成新的对象，所以如果需要进行字符串修改推荐使用StringBuffer。</p>
+<p>Stringbuilder类在java5被提出，它和StringBuffer之间最大的不同在于StringBuilder的方法不是线程安全的（不能同步访问）</p>
+<p>由于StringBuilder相比较于StringBuffer有速度优势，多数情况下建议使用StringBuilder类。</p>
+<ul>
+<li><strong>StringBuilder的构造方法</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public StringBuilder()</td>
+<td>创建一个空白可变字符串对象，不含任何内容</td>
+</tr>
+<tr>
+<td>pubilc StringBuilder(String str)</td>
+<td>根据字符串内容，创建可变字符串对象</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>StringBuilder的添加和反转方法</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pubilc StringBuiler append(任意类型)</td>
+<td>添加数据，并返回对象本身</td>
+</tr>
+<tr>
+<td>publiic StringBulider reveerse()</td>
+<td>返回相反的字符序列</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>StringBuileder和String的相互转换</strong></li>
+</ul>
+<p><strong>StringBuilder转换String</strong></p>
+<p><code>public String toString()</code>:通过toString()就可以实现吧StringBuilder转换为String</p>
+<p><strong>String转换StringBuilder</strong></p>
+<p><code>pubilc StringBuilder(String str)</code>:通过构造方法就可以实现把String转换为StringBuilder</p>
+<p><strong>目的</strong>：便于利用StringBuilder中的<code>append()</code>和<code>reverse()</code>方法</p>
+<ul>
+<li><strong>StringBuffer和StringBuilder各类方法</strong></li>
+</ul>
+<p>参考菜鸟教程的API文档：</p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/manual/jdk11api/java.base/java/lang/StringBuffer.html">java StringBuffer API </a></p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/manual/jdk11api/java.base/java/lang/StringBuilder.html">java StringBuilder API</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">wsy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.weisiyang.top/2022/03/27/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">https://www.weisiyang.top/2022/03/27/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.weisiyang.top" target="_blank">zero blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a></div><div class="post_share"><div class="social-share" data-image="/img/pixel/04.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/05/22/%E5%B8%B8%E7%94%A8dos%E5%91%BD%E4%BB%A4/"><img class="prev-cover" src="/img/pixel/06.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">常用dos命令</div></div></a></div><div class="next-post pull-right"><a href="/2022/03/27/markdown%20%E8%AF%AD%E6%B3%95/"><img class="next-cover" src="/img/pixel/07.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">markdown 语法</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/./img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">wsy</div><div class="author-info__description">记录学习笔记和一些小技术</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E5%85%A5"><span class="toc-text">引入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK%E3%80%81JRE%E3%80%81JVM"><span class="toc-text">JDK、JRE、JVM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E5%9E%8B%E5%92%8C%E8%A7%A3%E9%87%8A%E5%9E%8B"><span class="toc-text">编译型和解释型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E5%8C%96%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1"><span class="toc-text">结构化程序设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="toc-text">1.标识符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">2.数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">3.运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%8E%A7%E5%88%B6%E7%BB%93%E6%9E%84"><span class="toc-text">4.控制结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%95%B0%E7%BB%84"><span class="toc-text">5.数组</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#String%E7%B1%BB"><span class="toc-text">String类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#StringBuffer%E5%92%8CStringBuilder%E7%B1%BB"><span class="toc-text">StringBuffer和StringBuilder类</span></a></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/07/04/ssm%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" title="ssm框架学习"><img src="/img/pixel/10.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ssm框架学习"/></a><div class="content"><a class="title" href="/2024/07/04/ssm%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" title="ssm框架学习">ssm框架学习</a><time datetime="2024-07-04T13:42:52.000Z" title="发表于 2024-07-04 21:42:52">2024-07-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/05/21/linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="linux操作系统"><img src="/img/pixel/07.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="linux操作系统"/></a><div class="content"><a class="title" href="/2024/05/21/linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="linux操作系统">linux操作系统</a><time datetime="2024-05-21T12:56:08.000Z" title="发表于 2024-05-21 20:56:08">2024-05-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/17/python%E7%AC%94%E8%AE%B0/" title="python笔记"><img src="/img/pixel/05.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="python笔记"/></a><div class="content"><a class="title" href="/2023/03/17/python%E7%AC%94%E8%AE%B0/" title="python笔记">python笔记</a><time datetime="2023-03-17T12:56:08.000Z" title="发表于 2023-03-17 20:56:08">2023-03-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/16/c++%E7%AC%94%E8%AE%B0/" title="c++学习笔记"><img src="/img/pixel/11.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="c++学习笔记"/></a><div class="content"><a class="title" href="/2023/03/16/c++%E7%AC%94%E8%AE%B0/" title="c++学习笔记">c++学习笔记</a><time datetime="2023-03-16T12:56:08.000Z" title="发表于 2023-03-16 20:56:08">2023-03-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/22/%E5%B8%B8%E7%94%A8dos%E5%91%BD%E4%BB%A4/" title="常用dos命令"><img src="/img/pixel/06.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="常用dos命令"/></a><div class="content"><a class="title" href="/2022/05/22/%E5%B8%B8%E7%94%A8dos%E5%91%BD%E4%BB%A4/" title="常用dos命令">常用dos命令</a><time datetime="2022-05-22T12:56:08.000Z" title="发表于 2022-05-22 20:56:08">2022-05-22</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By wsy</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
