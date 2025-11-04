@@ -1,0 +1,301 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>android学习笔记 | zero blog</title><meta name="author" content="wsy"><meta name="copyright" content="wsy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、Android开发环境搭建1.1Android开发简介1.1.1Android发展历程安卓（Android）是一种&#x3D;&#x3D;基于Linux内核&#x3D;&#x3D;的自由及开放源代码的操作系统。主要使用于移动设备，如智能手机和平板电脑，由美国谷歌公司和开放手机联盟领导及开发。Android操作系统最初由AndyRubin开发，主要支持手机。  2005年8月由Google收购注">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android学习笔记">
+<meta property="og:url" content="https://www.weisiyang.top/2025/09/20/android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="zero blog">
+<meta property="og:description" content="一、Android开发环境搭建1.1Android开发简介1.1.1Android发展历程安卓（Android）是一种&#x3D;&#x3D;基于Linux内核&#x3D;&#x3D;的自由及开放源代码的操作系统。主要使用于移动设备，如智能手机和平板电脑，由美国谷歌公司和开放手机联盟领导及开发。Android操作系统最初由AndyRubin开发，主要支持手机。  2005年8月由Google收购注">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.weisiyang.top/img/pixel/11.webp">
+<meta property="article:published_time" content="2025-09-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-10-20T10:27:16.556Z">
+<meta property="article:author" content="wsy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.weisiyang.top/img/pixel/11.webp"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://www.weisiyang.top/2025/09/20/android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/img/pwa/manifest.json"/><link rel="apple-touch-icon" sizes="180x180" href="/img/pwa/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="/img/pwa/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/img/pwa/16.png"/><link rel="mask-icon" href="/img/pwa/safari-pinned-tab.svg" color="#5bbad5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'android学习笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-10-20 18:27:16'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/./img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-folder-open"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zero blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-folder-open"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">android学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-09-19T16:00:00.000Z" title="发表于 2025-09-20 00:00:00">2025-09-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-20T10:27:16.556Z" title="更新于 2025-10-20 18:27:16">2025-10-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="android学习笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="一、Android开发环境搭建"><a href="#一、Android开发环境搭建" class="headerlink" title="一、Android开发环境搭建"></a>一、Android开发环境搭建</h1><h2 id="1-1Android开发简介"><a href="#1-1Android开发简介" class="headerlink" title="1.1Android开发简介"></a>1.1Android开发简介</h2><h3 id="1-1-1Android发展历程"><a href="#1-1-1Android发展历程" class="headerlink" title="1.1.1Android发展历程"></a>1.1.1Android发展历程</h3><p>安卓（Android）是一种&#x3D;&#x3D;<em>基于Linux内核</em>&#x3D;&#x3D;的自由及开放源代码的操作系统。主要使用于移动设备，如智能手机和平板电脑，由美国谷歌公司和开放手机联盟领导及开发。Android操作系统最初由AndyRubin开发，主要支持手机。</p>
+<ul>
+<li>2005年8月由Google收购注资。</li>
+<li>2007年11月，Google与84家硬件制造商、软件开发商及电信营运商组建开放手机联盟共同研发改良Android系统，并发布了Android的源代码。</li>
+<li>第一部Android智能手机发布于2008年10月，由HTC公司制造。Android逐渐扩展到平板电脑及其他领域上，如电视、数码相机、游戏机、智能手表、车载大屏、智能家居等，并逐渐成为了人们日常生活中不可或缺的系统软件。</li>
+<li>2011年第一季度，Android在全球的市场份额首次超过塞班系统，跃居全球第一。</li>
+<li>2013年的第四季度，Android平台手机的全球市场份额已经达到78.1%。2013年09月24日谷歌开发的操作系统Android在迎来了5岁生日，全世界采用这款系统的设备数量已经达到10亿台。</li>
+<li>2019年，谷歌官方宣布全世界有25亿活跃的Android设备，还不包含大多数中国设备。</li>
+</ul>
+<p>表1-1 Android主要版本发布时间</p>
+<table>
+<thead>
+<tr>
+<th><strong>Android版本号</strong></th>
+<th><strong>对应API</strong></th>
+<th><strong>发布时间</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Android 13</td>
+<td>33</td>
+<td>2022年2月</td>
+</tr>
+<tr>
+<td>Android 12</td>
+<td>31</td>
+<td>2021年10月</td>
+</tr>
+<tr>
+<td>Android 11</td>
+<td>30</td>
+<td>2020年9月</td>
+</tr>
+<tr>
+<td>Android 10</td>
+<td>29</td>
+<td>2019年8月</td>
+</tr>
+<tr>
+<td>Android 9</td>
+<td>28</td>
+<td>2018年8月</td>
+</tr>
+<tr>
+<td>Android 8</td>
+<td>26&#x2F;27</td>
+<td>2017年8月</td>
+</tr>
+<tr>
+<td>Android 7</td>
+<td>24&#x2F;25</td>
+<td>2016年8月</td>
+</tr>
+<tr>
+<td>Android 6</td>
+<td>23</td>
+<td>2015年9月</td>
+</tr>
+<tr>
+<td>Android 5</td>
+<td>21&#x2F;22</td>
+<td>2014年6月</td>
+</tr>
+<tr>
+<td>Android 4.4</td>
+<td>19&#x2F;20</td>
+<td>2013年9月</td>
+</tr>
+</tbody></table>
+<h3 id="1-1-2-Android-Studio发展历程"><a href="#1-1-2-Android-Studio发展历程" class="headerlink" title="1.1.2 Android Studio发展历程"></a>1.1.2 Android Studio发展历程</h3><ul>
+<li>AndroidStudio是Android应用的开发工具，由谷歌公司在2013年5月推出，Android Studio基于IntelliJ IDEA演变而来，比Eclipse更加方便易用，运行速度也较快。<br><img src="https://image.wsy.xx.kg/20251020182705262.png" alt="Pasted image 20250920204359"></li>
+</ul>
+<h2 id="1-2-搭建Android-Studio开发环境"><a href="#1-2-搭建Android-Studio开发环境" class="headerlink" title="1.2 搭建Android Studio开发环境"></a>1.2 搭建Android Studio开发环境</h2><h3 id="1-2-1-开发机配置要求"><a href="#1-2-1-开发机配置要求" class="headerlink" title="1.2.1 开发机配置要求"></a>1.2.1 开发机配置要求</h3><ul>
+<li>硬件要求<ul>
+<li>内存要求至少8GB，越大越好。</li>
+<li>CPU要求1.5GHz以上，越快越好。</li>
+<li>硬盘要求系统盘剩余空间10GB以上，越大越好</li>
+<li>要求带无线网卡与USB插槽。</li>
+</ul>
+</li>
+<li>对操作系统要求（以Windows为例）<ul>
+<li>必须是64位系统，不能是32位系统。</li>
+<li>至少为Windows7，不支持Windows XP。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-2-Android-SDK"><a href="#1-2-2-Android-SDK" class="headerlink" title="1.2.2 Android SDK"></a>1.2.2 Android SDK</h3><ul>
+<li>SDK全称为Software Development Kit，意即软件开发工具包，它可将App源码编译为可执行的 App应用。</li>
+</ul>
+<h2 id="1-3-创建并编译App工程"><a href="#1-3-创建并编译App工程" class="headerlink" title="1.3 创建并编译App工程"></a>1.3 创建并编译App工程</h2><h3 id="1-3-1-Android-Studio-2025创建工程项目（基于java语言）"><a href="#1-3-1-Android-Studio-2025创建工程项目（基于java语言）" class="headerlink" title="1.3.1 Android Studio 2025创建工程项目（基于java语言）"></a>1.3.1 Android Studio 2025创建工程项目（基于java语言）</h3><ul>
+<li>new project</li>
+<li>选择noActivity的空白模板，然后在弹出的窗口中language项中选择Java和所需的最小SDK（这里我选择API28），点击finish创建项目</li>
+<li>在项目住路径下new一个emptyViewActivity<br><img src="https://image.wsy.xx.kg/20251020182705263.png" alt="Pasted image 20250920215443"></li>
+</ul>
+<h3 id="1-3-2-创建内置模拟器"><a href="#1-3-2-创建内置模拟器" class="headerlink" title="1.3.2 创建内置模拟器"></a>1.3.2 创建内置模拟器</h3><p>所谓模拟器，是指在电脑上构造一个演示窗口，模拟手机屏幕上的APP演示效果<br><img src="https://image.wsy.xx.kg/20251020182705264.png" alt="Pasted image 20250920215737"></p>
+<ol>
+<li>在Android studio中右边侧栏device manager中add a new device –&gt; create virtual device 。</li>
+<li>选择合适的模拟机型，这里我选择pixel 2,然后选择模拟器上运行的android版本，这里我选Android11，下载并finish即可。<br><img src="https://image.wsy.xx.kg/20251020182705265.png" alt="Pasted image 20250920221522"></li>
+</ol>
+<h3 id="1-3-3-编译发布到虚拟机"><a href="#1-3-3-编译发布到虚拟机" class="headerlink" title="1.3.3 编译发布到虚拟机"></a>1.3.3 编译发布到虚拟机</h3><p>点击Android Studio中run按钮会自动编译并安装到已经启动的虚拟机上</p>
+<h2 id="1-4-观察app运行日志"><a href="#1-4-观察app运行日志" class="headerlink" title="1.4 观察app运行日志"></a>1.4 观察app运行日志</h2><p>Android采用Log工具打印日志，它将各类日志划分为五个等级：</p>
+<ul>
+<li>Log.e：（error）表示错误信息，比如可能导致程序崩溃的异常。</li>
+<li>Log.w：(warning)表示警告信息。</li>
+<li>Log.i：(info)表示一般消息。</li>
+<li>Log.d：(debug)表示调试信息，可把程序运行时的变量值打印出来，方便跟踪调试。</li>
+<li>Log.v：(verbose)表示冗余信息。</li>
+</ul>
+<h1 id="二、android开发基础"><a href="#二、android开发基础" class="headerlink" title="二、android开发基础"></a>二、android开发基础</h1><h2 id="2-1-Android开发的特点"><a href="#2-1-Android开发的特点" class="headerlink" title="2.1 Android开发的特点"></a>2.1 Android开发的特点</h2><ol>
+<li><p><strong>app运行的环境</strong></p>
+<ul>
+<li>虚拟机上运行各个参数不同的安卓设备</li>
+<li>真机上运行</li>
+</ul>
+</li>
+<li><p><strong>app开发的语言</strong></p>
+<ul>
+<li>Java和Kotlin</li>
+<li>c&#x2F;c++<br>  不管是ava还是Kotlin，它们都属于解释型语言，这类语言在运行之时才将程序翻译成机器语言，故而执行效率偏低。虽然现在手机配置越来越高，大多数场景的App运行都很流畅，但是涉及图像与音视频处理等复杂运算的场合，解释型语言的性能瓶颈便暴露出来。<br>  编译型语言在首次编译时就将代码编译为机器语言，后续运行无须重新编译，直接使用之前的编译文件即可，因此执行效率比解释型语言高。C&#x2F;C+正是编译型语言的代表，它能够有效弥补解释型语言的性能缺憾，借助于JNI技术(avaNativeInterface，即Java原生接口），Java代码允许调用C&#x2F;C++编写的程序。事实上，Android的sDK开发包内部定义了许多JNI接口，包括图像读写在内的底层代码均由C&#x2F;C++编写，再由外部通过封装好的Java方法调用。<br>  不过Android系统的JNI编程属于高级开发内容，初学者无须关注JNI开发，也不要求掌握C&#x2F;C++</li>
+<li>xml<br>  XML全称ExtensibleMarkupLanguage，即可扩展标记语言，严格地说，XML并非编程语言，只是一种标记语言。它类似于HTML，利用各种标签表达页面元素，以及各元素之间的层级关系及其排列组合。每个XML标签都是独立的控件对象，标签内部的属性<br>  以“android：“打头，表示这是标准的安卓属性，各属性分别代表控件的某种规格。比如下面是以XML书写的文本控件：</li>
+</ul>
+</li>
+<li><p><strong>app连接的数据库</strong><br> 在学习Java编程的时候，基本会学到数据库操作，通过IDBC连接数据库进行记录的增删改查，这个数据库可能是MySQL，也可能是Oracle，还可能是SQLServer。然而手机应用不能直接操作上述几种数据库，因为数据库软件也得像应用软件那样安装到操作系统上，比如MySQL提供了Windows系统的安装包，也提供了Linux系统的安装包，可是它没有提供Android系统的安装包呢，所以MySQL没法在Android系统上安装，手机里面的App也就不能直连MySQL。</p>
+<p> 既然MySQL、Oracle这些企业数据库无法在手机安装，那么App怎样管理业务方面的数据记录呢？其实Android早已内置了专门的数据库名为SQLite，它遵循关系数据库的设计理念，SQL语法类似于MySQL。不同之处在于，SQLite无须单独安装，因为它内嵌到应用进程当中，所以App无须配置连接信息，即可直接对其增删改查。由于SQLite嵌入到应用程序，省去了配置数据库服务器的开销，因此它又被归类为嵌入式数据库。</p>
+<p> 可是SQLite的数据库文件保存在手机上，开发者拿不到用户的手机，又该如何获取App存储的业务数据？比如用户的注册信息、用户的购物记录，等等。如果像JavaWeb那样，业务数据统一保存在后端的数据库服务器，开发者只要登录数据库服务器，就能方便地查询导出需要的记录信息。</p>
+<p> 手机端的App，连同程序代码及其内置的嵌入式数据库，其实是个又独立又完整的程序实体，它只负责手机上的用户交互与信息处理，该实体被称作<strong>客户端</strong>。而后端的JavaWeb服务，包括Web代码和数据库服务器，同样构成另一个单独运行的程序实体，它只负责后台的业务逻辑与数据库操作，该实体被称作<strong>服务端</strong>。客户端与服务端之前通过HTTP接口通信，每当客户端觉得需要把信息发给服务端，或者需要从服务端获取信息时，客户端便向服务端发起HTTP请求，服务端收到客户端的请求之后，根据规则完成数据处理，并将处理结果返回给客户端。这样客户端经由HTTP接口并借服务端之手，方能间接读写后端的数据库服务器（如MySQL）。</p>
+</li>
+</ol>
+<h2 id="2-2-Android工程目录结构"><a href="#2-2-Android工程目录结构" class="headerlink" title="2.2 Android工程目录结构"></a>2.2 Android工程目录结构</h2><ol>
+<li><strong>目录结构</strong></li>
+</ol>
+<ul>
+<li>App工程分为两个层次，第一个层次是项目，另一个层次是模块。</li>
+<li>模块依附于项目，每个项目至少有一个模块，也能拥有多个模块。</li>
+<li>一般所言的“编译运行App”，指的是运行某个模块，而非运行某个项目，因为模块才对应实际的App。</li>
+</ul>
+<ol start="2">
+<li><strong>目录说明</strong></li>
+</ol>
+<ul>
+<li>App项目下面有两个分类：app（代表app模块)、GradleScripts。<br><strong>app下面有3个子目录</strong>：<br><img src="https://image.wsy.xx.kg/20251020182705266.png" alt="Pasted image 20250921201708"><br>(1)manifests:子目录下只有一个AndroidManifest.xml,是app运行的配置文件<br>(2)java:子目录下面有3个com.example.myapp包，其中第一个包存放当前模块的java源代码，后面两个包存放测试用的java代码。<br>(3)res:子目录下存放当前app的资源文件，且还有4个子目录：</li>
+<li>drawable目录存放图形描述文件与图片文件。</li>
+<li>layout目录存放App页面的布局文件。</li>
+<li>mipmap目录存放App的启动图标。</li>
+<li>values目录存放一些常量定义文件，例如字符串常量strings.xml、像素常量dimens.xml、颜色常量colors.xml、样式风格定义styles.xml等。</li>
+</ul>
+<p><strong>GradleScripts下面主要是工程的编译配置文件：</strong><br>(1）build.gradle，该文件分为项目级与模块级两种，用于描述App工程的编译规则。<br>(2)proguard-rules.pro，该文件用于描述java代码的混淆规则。<br>(3)gradle.properties，该文件用于配置编译工程的命令行参数，一般无须改动。<br>(4)settings.gradle，该文件配置了需要编译哪些模块。初始内容为include’app’’，表示只编译app模块。<br>(5)local.properties，项目的本地配置文件，它在工程编译时自动生成，用于描述开发者电脑的环境配置，包括SDK的本地路径、NDK<br>的本地路径等。</p>
+<ol start="3">
+<li><p>Gradle是一个项目自动化构建工具，帮我们做了依赖、打包、部署、发布、各种渠道的<br>差异管理等工作。</p>
+</li>
+<li><p>编译配置文件build.gradle</p>
+</li>
+</ol>
+<ul>
+<li><em>项目级别</em>的build.gradle指定了当前项目的总体编译规则。</li>
+<li><em>模块级别</em>的build.gradle对应于具体模块，每个模块都有自己的build.gradle，它指定了当前模块的详细编译规则。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">wsy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.weisiyang.top/2025/09/20/android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">https://www.weisiyang.top/2025/09/20/android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.weisiyang.top" target="_blank">zero blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/pixel/11.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/10/20/linux-OpenEuler/"><img class="prev-cover" src="/img/pixel/11.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info"></div></div></a></div><div class="next-post pull-right"><a href="/2024/07/04/ssm%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/"><img class="next-cover" src="/img/pixel/10.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">ssm框架学习</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/./img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">wsy</div><div class="author-info__description">记录学习笔记和一些小技术</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81Android%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-text">一、Android开发环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1Android%E5%BC%80%E5%8F%91%E7%AE%80%E4%BB%8B"><span class="toc-text">1.1Android开发简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1Android%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B"><span class="toc-text">1.1.1Android发展历程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-Android-Studio%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B"><span class="toc-text">1.1.2 Android Studio发展历程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E6%90%AD%E5%BB%BAAndroid-Studio%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="toc-text">1.2 搭建Android Studio开发环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-%E5%BC%80%E5%8F%91%E6%9C%BA%E9%85%8D%E7%BD%AE%E8%A6%81%E6%B1%82"><span class="toc-text">1.2.1 开发机配置要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-Android-SDK"><span class="toc-text">1.2.2 Android SDK</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E5%88%9B%E5%BB%BA%E5%B9%B6%E7%BC%96%E8%AF%91App%E5%B7%A5%E7%A8%8B"><span class="toc-text">1.3 创建并编译App工程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-Android-Studio-2025%E5%88%9B%E5%BB%BA%E5%B7%A5%E7%A8%8B%E9%A1%B9%E7%9B%AE%EF%BC%88%E5%9F%BA%E4%BA%8Ejava%E8%AF%AD%E8%A8%80%EF%BC%89"><span class="toc-text">1.3.1 Android Studio 2025创建工程项目（基于java语言）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-2-%E5%88%9B%E5%BB%BA%E5%86%85%E7%BD%AE%E6%A8%A1%E6%8B%9F%E5%99%A8"><span class="toc-text">1.3.2 创建内置模拟器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-3-%E7%BC%96%E8%AF%91%E5%8F%91%E5%B8%83%E5%88%B0%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="toc-text">1.3.3 编译发布到虚拟机</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E8%A7%82%E5%AF%9Fapp%E8%BF%90%E8%A1%8C%E6%97%A5%E5%BF%97"><span class="toc-text">1.4 观察app运行日志</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81android%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80"><span class="toc-text">二、android开发基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Android%E5%BC%80%E5%8F%91%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-text">2.1 Android开发的特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Android%E5%B7%A5%E7%A8%8B%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-text">2.2 Android工程目录结构</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/10/20/linux-OpenEuler/" title="无题"><img src="/img/pixel/11.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2025/10/20/linux-OpenEuler/" title="无题">无题</a><time datetime="2025-10-20T10:31:45.339Z" title="发表于 2025-10-20 18:31:45">2025-10-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/20/android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="android学习笔记"><img src="/img/pixel/11.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="android学习笔记"/></a><div class="content"><a class="title" href="/2025/09/20/android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="android学习笔记">android学习笔记</a><time datetime="2025-09-19T16:00:00.000Z" title="发表于 2025-09-20 00:00:00">2025-09-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/07/04/ssm%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" title="ssm框架学习"><img src="/img/pixel/10.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ssm框架学习"/></a><div class="content"><a class="title" href="/2024/07/04/ssm%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/" title="ssm框架学习">ssm框架学习</a><time datetime="2024-07-04T13:42:52.000Z" title="发表于 2024-07-04 21:42:52">2024-07-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/05/21/linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="linux操作系统"><img src="/img/pixel/07.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="linux操作系统"/></a><div class="content"><a class="title" href="/2024/05/21/linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="linux操作系统">linux操作系统</a><time datetime="2024-05-21T12:56:08.000Z" title="发表于 2024-05-21 20:56:08">2024-05-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/17/python%E7%AC%94%E8%AE%B0/" title="python笔记"><img src="/img/pixel/05.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="python笔记"/></a><div class="content"><a class="title" href="/2023/03/17/python%E7%AC%94%E8%AE%B0/" title="python笔记">python笔记</a><time datetime="2023-03-17T12:56:08.000Z" title="发表于 2023-03-17 20:56:08">2023-03-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By wsy</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
