@@ -1,0 +1,365 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>git版本控制 | zero blog</title><meta name="author" content="wsy"><meta name="copyright" content="wsy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Git 本地版本控制完全教程 本教程基于你下载的项目 git_tutorial_project，手把手教你使用 Git 进行本地版本控制。项目链接🔗   目录 Git 安装与配置 初始化仓库 基本工作流程 查看状态与历史 代码回退（核心） 分支管理 标签与里程碑 撤销与清理 常用命令速查表   1. Git 安装与配置1.1 安装 GitUbuntu&#x2F;Debian: 12sudo ap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git版本控制">
+<meta property="og:url" content="https://blog.wsy.xx.kg/2026/07/19/git_tutorial/index.html">
+<meta property="og:site_name" content="zero blog">
+<meta property="og:description" content="Git 本地版本控制完全教程 本教程基于你下载的项目 git_tutorial_project，手把手教你使用 Git 进行本地版本控制。项目链接🔗   目录 Git 安装与配置 初始化仓库 基本工作流程 查看状态与历史 代码回退（核心） 分支管理 标签与里程碑 撤销与清理 常用命令速查表   1. Git 安装与配置1.1 安装 GitUbuntu&#x2F;Debian: 12sudo ap">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.wsy.xx.kg/img/pixel/05.webp">
+<meta property="article:published_time" content="2026-07-19T06:12:08.000Z">
+<meta property="article:modified_time" content="2026-08-16T12:29:02.363Z">
+<meta property="article:author" content="wsy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.wsy.xx.kg/img/pixel/05.webp"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.wsy.xx.kg/2026/07/19/git_tutorial/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/img/pwa/manifest.json"/><link rel="apple-touch-icon" sizes="180x180" href="/img/pwa/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="/img/pwa/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/img/pwa/16.png"/><link rel="mask-icon" href="/img/pwa/safari-pinned-tab.svg" color="#5bbad5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'git版本控制',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-08-16 20:29:02'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/./img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-folder-open"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">zero blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-folder-open"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">git版本控制</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-07-19T06:12:08.000Z" title="发表于 2026-07-19 14:12:08">2026-07-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-08-16T12:29:02.363Z" title="更新于 2026-08-16 20:29:02">2026-08-16</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="git版本控制"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="Git-本地版本控制完全教程"><a href="#Git-本地版本控制完全教程" class="headerlink" title="Git 本地版本控制完全教程"></a>Git 本地版本控制完全教程</h1><blockquote>
+<p>本教程基于你下载的项目 <code>git_tutorial_project</code>，手把手教你使用 Git 进行本地版本控制。<a target="_blank" rel="noopener" href="https://image.wsy.xx.kg/20260709140259753.zip">项目链接🔗</a></p>
+</blockquote>
+<hr>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
+<li><a href="#1-git-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE">Git 安装与配置</a></li>
+<li><a href="#2-%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BB%93%E5%BA%93">初始化仓库</a></li>
+<li><a href="#3-%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B">基本工作流程</a></li>
+<li><a href="#4-%E6%9F%A5%E7%9C%8B%E7%8A%B6%E6%80%81%E4%B8%8E%E5%8E%86%E5%8F%B2">查看状态与历史</a></li>
+<li><a href="#5-%E4%BB%A3%E7%A0%81%E5%9B%9E%E9%80%80%E6%A0%B8%E5%BF%83">代码回退（核心）</a></li>
+<li><a href="#6-%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86">分支管理</a></li>
+<li><a href="#7-%E6%A0%87%E7%AD%BE%E4%B8%8E%E9%87%8C%E7%A8%8B%E7%A2%91">标签与里程碑</a></li>
+<li><a href="#8-%E6%92%A4%E9%94%80%E4%B8%8E%E6%B8%85%E7%90%86">撤销与清理</a></li>
+<li><a href="#9-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E8%A1%A8">常用命令速查表</a></li>
+</ol>
+<hr>
+<h2 id="1-Git-安装与配置"><a href="#1-Git-安装与配置" class="headerlink" title="1. Git 安装与配置"></a>1. Git 安装与配置</h2><h3 id="1-1-安装-Git"><a href="#1-1-安装-Git" class="headerlink" title="1.1 安装 Git"></a>1.1 安装 Git</h3><p><strong>Ubuntu&#x2F;Debian:</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install git</span><br></pre></td></tr></table></figure>
+
+<p><strong>macOS:</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install git</span><br></pre></td></tr></table></figure>
+
+<p><strong>Windows:</strong><br>下载安装包：<a target="_blank" rel="noopener" href="https://git-scm.com/download/win">https://git-scm.com/download/win</a></p>
+<h3 id="1-2-配置用户信息（必须）"><a href="#1-2-配置用户信息（必须）" class="headerlink" title="1.2 配置用户信息（必须）"></a>1.2 配置用户信息（必须）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置全局用户名和邮箱（会记录在每次提交中）</span></span><br><span class="line">git config --global user.name <span class="string">&quot;你的名字&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;your@email.com&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证配置</span></span><br><span class="line">git config --list</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-配置默认编辑器（可选）"><a href="#1-3-配置默认编辑器（可选）" class="headerlink" title="1.3 配置默认编辑器（可选）"></a>1.3 配置默认编辑器（可选）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 VS Code 作为默认编辑器</span></span><br><span class="line">git config --global core.editor <span class="string">&quot;code --wait&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 或使用 nano</span></span><br><span class="line">git config --global core.editor <span class="string">&quot;nano&quot;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="2-初始化仓库"><a href="#2-初始化仓库" class="headerlink" title="2. 初始化仓库"></a>2. 初始化仓库</h2><p>进入项目目录，初始化 Git 仓库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入项目目录</span></span><br><span class="line"><span class="built_in">cd</span> git_tutorial_project</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化仓库（会创建 .git 隐藏目录）</span></span><br><span class="line">git init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 .git 目录（Linux/macOS）</span></span><br><span class="line"><span class="built_in">ls</span> -la .git</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>提示</strong>：<code>.git</code> 目录就是 Git 的数据库，<strong>不要手动修改或删除它</strong>。</p>
+</blockquote>
+<hr>
+<h2 id="3-基本工作流程"><a href="#3-基本工作流程" class="headerlink" title="3. 基本工作流程"></a>3. 基本工作流程</h2><p>Git 有三个核心区域：</p>
+<ul>
+<li><strong>工作区（Working Directory）</strong>：你实际编辑的文件</li>
+<li><strong>暂存区（Staging Area&#x2F;Index）</strong>：准备提交的更改</li>
+<li><strong>本地仓库（Repository）</strong>：提交后的历史记录</li>
+</ul>
+<h3 id="3-1-添加文件到暂存区"><a href="#3-1-添加文件到暂存区" class="headerlink" title="3.1 添加文件到暂存区"></a>3.1 添加文件到暂存区</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加单个文件</span></span><br><span class="line">git add README.md</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加当前目录所有更改</span></span><br><span class="line">git add .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加特定类型的文件</span></span><br><span class="line">git add *.py</span><br><span class="line"></span><br><span class="line"><span class="comment"># 交互式添加（逐个确认）</span></span><br><span class="line">git add -p</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-提交更改到本地仓库"><a href="#3-2-提交更改到本地仓库" class="headerlink" title="3.2 提交更改到本地仓库"></a>3.2 提交更改到本地仓库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本提交</span></span><br><span class="line">git commit -m <span class="string">&quot;提交说明&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加并提交（仅对已跟踪文件）</span></span><br><span class="line">git commit -am <span class="string">&quot;修改说明&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 详细提交信息（会打开编辑器）</span></span><br><span class="line">git commit</span><br></pre></td></tr></table></figure>
+
+<p><strong>提交信息规范：</strong></p>
+<ul>
+<li><code>feat:</code> 新功能</li>
+<li><code>fix:</code> 修复 bug</li>
+<li><code>docs:</code> 文档更新</li>
+<li><code>style:</code> 代码格式调整</li>
+<li><code>refactor:</code> 重构</li>
+<li><code>test:</code> 测试相关</li>
+</ul>
+<h3 id="3-3-实操练习"><a href="#3-3-实操练习" class="headerlink" title="3.3 实操练习"></a>3.3 实操练习</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 初始化仓库</span></span><br><span class="line">git init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 添加所有文件到暂存区</span></span><br><span class="line">git add .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 提交初始版本</span></span><br><span class="line">git commit -m <span class="string">&quot;feat: 项目初始化，添加基础结构&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 修改 src/main.py（比如修改打印内容）</span></span><br><span class="line"><span class="comment"># 用编辑器打开 src/main.py，修改某行代码</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 查看修改了哪些文件</span></span><br><span class="line">git status</span><br><span class="line"></span><br><span class="line"><span class="comment"># 6. 查看具体修改内容</span></span><br><span class="line">git diff</span><br><span class="line"></span><br><span class="line"><span class="comment"># 7. 添加到暂存区</span></span><br><span class="line">git add src/main.py</span><br><span class="line"></span><br><span class="line"><span class="comment"># 8. 提交修改</span></span><br><span class="line">git commit -m <span class="string">&quot;fix: 更新主程序输出内容&quot;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="4-查看状态与历史"><a href="#4-查看状态与历史" class="headerlink" title="4. 查看状态与历史"></a>4. 查看状态与历史</h2><h3 id="4-1-查看当前状态"><a href="#4-1-查看当前状态" class="headerlink" title="4.1 查看当前状态"></a>4.1 查看当前状态</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看哪些文件被修改、哪些在暂存区</span></span><br><span class="line">git status</span><br><span class="line"></span><br><span class="line"><span class="comment"># 简洁模式</span></span><br><span class="line">git status -s</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-查看修改内容"><a href="#4-2-查看修改内容" class="headerlink" title="4.2 查看修改内容"></a>4.2 查看修改内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看工作区与暂存区的差异</span></span><br><span class="line">git diff</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看暂存区与最新提交的差异</span></span><br><span class="line">git diff --staged</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看某个文件的修改历史</span></span><br><span class="line">git diff HEAD -- src/main.py</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-查看提交历史"><a href="#4-3-查看提交历史" class="headerlink" title="4.3 查看提交历史"></a>4.3 查看提交历史</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本日志</span></span><br><span class="line">git <span class="built_in">log</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 简洁一行显示</span></span><br><span class="line">git <span class="built_in">log</span> --oneline</span><br><span class="line"></span><br><span class="line"><span class="comment"># 图形化显示分支</span></span><br><span class="line">git <span class="built_in">log</span> --oneline --graph --all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看最近 5 条</span></span><br><span class="line">git <span class="built_in">log</span> -5</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看某个文件的修改历史</span></span><br><span class="line">git <span class="built_in">log</span> --follow src/main.py</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看每次提交的详细改动</span></span><br><span class="line">git <span class="built_in">log</span> -p</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-4-查看某个提交详情"><a href="#4-4-查看某个提交详情" class="headerlink" title="4.4 查看某个提交详情"></a>4.4 查看某个提交详情</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看最新提交</span></span><br><span class="line">git show</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看指定提交（使用 commit ID 前几位）</span></span><br><span class="line">git show abc1234</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看某次提交中某个文件的内容</span></span><br><span class="line">git show abc1234:src/main.py</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="5-代码回退（核心）"><a href="#5-代码回退（核心）" class="headerlink" title="5. 代码回退（核心）"></a>5. 代码回退（核心）</h2><p>这是最重要的部分，掌握这些命令可以救你于水火。</p>
+<h3 id="5-1-回退到指定版本（保留修改）"><a href="#5-1-回退到指定版本（保留修改）" class="headerlink" title="5.1 回退到指定版本（保留修改）"></a>5.1 回退到指定版本（保留修改）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 软回退：回退到某个提交，但保留工作区和暂存区的修改</span></span><br><span class="line">git reset --soft HEAD~1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解释：HEAD~1 表示上一个提交</span></span><br><span class="line"><span class="comment"># --soft 只移动 HEAD 指针，不改工作区文件</span></span><br><span class="line"><span class="comment"># 适用场景：提交信息写错了，想重新提交</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-回退到指定版本（丢弃暂存区）"><a href="#5-2-回退到指定版本（丢弃暂存区）" class="headerlink" title="5.2 回退到指定版本（丢弃暂存区）"></a>5.2 回退到指定版本（丢弃暂存区）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 混合回退（默认）：回退到某个提交，保留工作区修改，清空暂存区</span></span><br><span class="line">git reset --mixed HEAD~1</span><br><span class="line"><span class="comment"># 或简写</span></span><br><span class="line">git reset HEAD~1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 适用场景：提交了不该提交的文件，想重新选择添加哪些文件</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-3-回退到指定版本（完全丢弃修改）⚠️"><a href="#5-3-回退到指定版本（完全丢弃修改）⚠️" class="headerlink" title="5.3 回退到指定版本（完全丢弃修改）⚠️"></a>5.3 回退到指定版本（完全丢弃修改）⚠️</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 硬回退：彻底回退到某个提交，丢弃所有修改（危险！）</span></span><br><span class="line">git reset --hard HEAD~1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 适用场景：彻底放弃最近的修改，回到某个干净状态</span></span><br><span class="line"><span class="comment"># ⚠️ 警告：此操作会丢失工作区和暂存区的所有修改，不可恢复！</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-4-回退到指定-commit-ID"><a href="#5-4-回退到指定-commit-ID" class="headerlink" title="5.4 回退到指定 commit ID"></a>5.4 回退到指定 commit ID</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先查看历史，找到 commit ID</span></span><br><span class="line">git <span class="built_in">log</span> --oneline</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出示例：</span></span><br><span class="line"><span class="comment"># a1b2c3d (HEAD -&gt; main) 修复 bug</span></span><br><span class="line"><span class="comment"># e4f5g6h 添加新功能</span></span><br><span class="line"><span class="comment"># i7j8k9l 初始提交</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 回退到 &quot;添加新功能&quot; 那次提交</span></span><br><span class="line">git reset --hard e4f5g6h</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者回退 2 个版本</span></span><br><span class="line">git reset --hard HEAD~2</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-5-回退后后悔了？用-reflog-找回！"><a href="#5-5-回退后后悔了？用-reflog-找回！" class="headerlink" title="5.5 回退后后悔了？用 reflog 找回！"></a>5.5 回退后后悔了？用 reflog 找回！</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看所有操作记录（包括被删除的提交）</span></span><br><span class="line">git reflog</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出示例：</span></span><br><span class="line"><span class="comment"># a1b2c3d HEAD@&#123;0&#125;: reset: moving to HEAD~1</span></span><br><span class="line"><span class="comment"># e4f5g6h HEAD@&#123;1&#125;: commit: 修复 bug</span></span><br><span class="line"><span class="comment"># i7j8k9l HEAD@&#123;2&#125;: commit: 初始提交</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复到回退前的状态</span></span><br><span class="line">git reset --hard e4f5g6h</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>reflog 是救命稻草</strong>，即使使用了 <code>git reset --hard</code>，只要 reflog 还在，就能找回。</p>
+</blockquote>
+<h3 id="5-6-撤销工作区的修改（未-add）"><a href="#5-6-撤销工作区的修改（未-add）" class="headerlink" title="5.6 撤销工作区的修改（未 add）"></a>5.6 撤销工作区的修改（未 add）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 撤销某个文件在工作区的修改（恢复到上次提交的状态）</span></span><br><span class="line">git checkout -- src/main.py</span><br><span class="line"></span><br><span class="line"><span class="comment"># 撤销所有文件在工作区的修改</span></span><br><span class="line">git checkout -- .</span><br><span class="line"></span><br><span class="line"><span class="comment"># ⚠️ 注意：这会丢失工作区的修改，谨慎使用！</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-7-撤销暂存区的修改（已-add-未-commit）"><a href="#5-7-撤销暂存区的修改（已-add-未-commit）" class="headerlink" title="5.7 撤销暂存区的修改（已 add 未 commit）"></a>5.7 撤销暂存区的修改（已 add 未 commit）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 把文件从暂存区移回工作区（保留修改）</span></span><br><span class="line">git reset HEAD src/main.py</span><br><span class="line"></span><br><span class="line"><span class="comment"># 撤销所有暂存</span></span><br><span class="line">git reset HEAD</span><br><span class="line"></span><br><span class="line"><span class="comment"># 然后再用 checkout 撤销工作区修改（如果需要）</span></span><br><span class="line">git checkout -- src/main.py</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-8-修改最后一次提交"><a href="#5-8-修改最后一次提交" class="headerlink" title="5.8 修改最后一次提交"></a>5.8 修改最后一次提交</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改提交信息</span></span><br><span class="line">git commit --amend -m <span class="string">&quot;新的提交信息&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 追加文件到最后一次提交（先 add，再 amend）</span></span><br><span class="line">git add 漏掉的文件</span><br><span class="line">git commit --amend --no-edit</span><br><span class="line"></span><br><span class="line"><span class="comment"># ⚠️ 注意：如果已经 push 到远程，不要 amend！</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-9-回退实操练习"><a href="#5-9-回退实操练习" class="headerlink" title="5.9 回退实操练习"></a>5.9 回退实操练习</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 场景 1：提交信息写错了</span></span><br><span class="line">git commit -m <span class="string">&quot;写错了的提交信息&quot;</span></span><br><span class="line">git commit --amend -m <span class="string">&quot;正确的提交信息&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 场景 2：提交了不该提交的文件</span></span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;不小心提交了临时文件&quot;</span></span><br><span class="line">git reset --soft HEAD~1       <span class="comment"># 回退到上次提交，保留修改</span></span><br><span class="line">git reset HEAD 临时文件.txt   <span class="comment"># 从暂存区移除</span></span><br><span class="line">git checkout -- 临时文件.txt  <span class="comment"># 恢复临时文件（如果需要）</span></span><br><span class="line">git add .                     <span class="comment"># 重新添加需要的文件</span></span><br><span class="line">git commit -m <span class="string">&quot;feat: 正确的提交&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 场景 3：彻底放弃最近的所有修改</span></span><br><span class="line">git status                    <span class="comment"># 确认当前状态</span></span><br><span class="line">git reset --hard HEAD         <span class="comment"># 回到最新提交，丢弃所有修改</span></span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">git reset --hard HEAD~2       <span class="comment"># 回退 2 个版本</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 场景 4：回退后后悔了</span></span><br><span class="line">git reflog                    <span class="comment"># 查看操作历史</span></span><br><span class="line">git reset --hard HEAD@&#123;1&#125;     <span class="comment"># 恢复到回退前的状态</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="6-分支管理"><a href="#6-分支管理" class="headerlink" title="6. 分支管理"></a>6. 分支管理</h2><h3 id="6-1-创建与切换分支"><a href="#6-1-创建与切换分支" class="headerlink" title="6.1 创建与切换分支"></a>6.1 创建与切换分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看所有分支</span></span><br><span class="line">git branch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建新分支</span></span><br><span class="line">git branch feature-login</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到新分支</span></span><br><span class="line">git checkout feature-login</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建并切换（一步完成）</span></span><br><span class="line">git checkout -b feature-login</span><br><span class="line"></span><br><span class="line"><span class="comment"># 现代 Git 推荐写法</span></span><br><span class="line">git switch -c feature-login</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2-合并分支"><a href="#6-2-合并分支" class="headerlink" title="6.2 合并分支"></a>6.2 合并分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到主分支</span></span><br><span class="line">git checkout main</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并 feature-login 分支到当前分支</span></span><br><span class="line">git merge feature-login</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果合并冲突，手动解决后</span></span><br><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;merge: 合并 feature-login 分支&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-3-删除分支"><a href="#6-3-删除分支" class="headerlink" title="6.3 删除分支"></a>6.3 删除分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除已合并的分支</span></span><br><span class="line">git branch -d feature-login</span><br><span class="line"></span><br><span class="line"><span class="comment"># 强制删除未合并的分支</span></span><br><span class="line">git branch -D feature-login</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-4-储藏临时修改（Stash）"><a href="#6-4-储藏临时修改（Stash）" class="headerlink" title="6.4 储藏临时修改（Stash）"></a>6.4 储藏临时修改（Stash）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 储藏当前修改（临时保存，清空工作区）</span></span><br><span class="line">git stash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看储藏列表</span></span><br><span class="line">git stash list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复最近储藏</span></span><br><span class="line">git stash pop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复指定储藏</span></span><br><span class="line">git stash apply stash@&#123;1&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除储藏</span></span><br><span class="line">git stash drop stash@&#123;0&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="7-标签与里程碑"><a href="#7-标签与里程碑" class="headerlink" title="7. 标签与里程碑"></a>7. 标签与里程碑</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建标签</span></span><br><span class="line">git tag -a v1.0 -m <span class="string">&quot;版本 1.0 发布&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看标签</span></span><br><span class="line">git tag</span><br><span class="line"></span><br><span class="line"><span class="comment"># 切换到标签</span></span><br><span class="line">git checkout v1.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除标签</span></span><br><span class="line">git tag -d v1.0</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="8-撤销与清理"><a href="#8-撤销与清理" class="headerlink" title="8. 撤销与清理"></a>8. 撤销与清理</h2><h3 id="8-1-清理未跟踪文件"><a href="#8-1-清理未跟踪文件" class="headerlink" title="8.1 清理未跟踪文件"></a>8.1 清理未跟踪文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看会删除哪些文件（预览）</span></span><br><span class="line">git clean -n</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除未跟踪文件</span></span><br><span class="line">git clean -f</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除未跟踪文件和目录</span></span><br><span class="line">git clean -fd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 连 .gitignore 忽略的文件也删除</span></span><br><span class="line">git clean -fdx</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-2-忽略文件权限变化"><a href="#8-2-忽略文件权限变化" class="headerlink" title="8.2 忽略文件权限变化"></a>8.2 忽略文件权限变化</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.filemode <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="9-常用命令速查表"><a href="#9-常用命令速查表" class="headerlink" title="9. 常用命令速查表"></a>9. 常用命令速查表</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>git init</code></td>
+<td>初始化仓库</td>
+</tr>
+<tr>
+<td><code>git add &lt;file&gt;</code></td>
+<td>添加文件到暂存区</td>
+</tr>
+<tr>
+<td><code>git add .</code></td>
+<td>添加所有更改</td>
+</tr>
+<tr>
+<td><code>git commit -m &quot;msg&quot;</code></td>
+<td>提交更改</td>
+</tr>
+<tr>
+<td><code>git status</code></td>
+<td>查看状态</td>
+</tr>
+<tr>
+<td><code>git diff</code></td>
+<td>查看工作区差异</td>
+</tr>
+<tr>
+<td><code>git log --oneline</code></td>
+<td>查看提交历史</td>
+</tr>
+<tr>
+<td><code>git log --graph --all</code></td>
+<td>图形化查看分支</td>
+</tr>
+<tr>
+<td><code>git reflog</code></td>
+<td>查看操作记录</td>
+</tr>
+<tr>
+<td><code>git reset --soft HEAD~1</code></td>
+<td>软回退（保留修改）</td>
+</tr>
+<tr>
+<td><code>git reset --mixed HEAD~1</code></td>
+<td>混合回退（默认）</td>
+</tr>
+<tr>
+<td><code>git reset --hard HEAD~1</code></td>
+<td>硬回退（丢弃修改）</td>
+</tr>
+<tr>
+<td><code>git checkout -- &lt;file&gt;</code></td>
+<td>撤销工作区修改</td>
+</tr>
+<tr>
+<td><code>git reset HEAD &lt;file&gt;</code></td>
+<td>撤销暂存区修改</td>
+</tr>
+<tr>
+<td><code>git commit --amend</code></td>
+<td>修改最后一次提交</td>
+</tr>
+<tr>
+<td><code>git branch</code></td>
+<td>查看分支</td>
+</tr>
+<tr>
+<td><code>git branch &lt;name&gt;</code></td>
+<td>创建分支</td>
+</tr>
+<tr>
+<td><code>git checkout &lt;branch&gt;</code></td>
+<td>切换分支</td>
+</tr>
+<tr>
+<td><code>git checkout -b &lt;name&gt;</code></td>
+<td>创建并切换分支</td>
+</tr>
+<tr>
+<td><code>git merge &lt;branch&gt;</code></td>
+<td>合并分支</td>
+</tr>
+<tr>
+<td><code>git stash</code></td>
+<td>储藏临时修改</td>
+</tr>
+<tr>
+<td><code>git stash pop</code></td>
+<td>恢复储藏</td>
+</tr>
+<tr>
+<td><code>git tag &lt;name&gt;</code></td>
+<td>创建标签</td>
+</tr>
+<tr>
+<td><code>git clean -fd</code></td>
+<td>清理未跟踪文件</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Git 的核心就是围绕 <strong>工作区 → 暂存区 → 本地仓库</strong> 这三个区域的流转。</p>
+<p>最重要的保命命令：</p>
+<ol>
+<li><strong><code>git reflog</code></strong> —— 后悔药，能找回几乎所有操作</li>
+<li><strong><code>git status</code></strong> —— 随时查看当前状态</li>
+<li><strong><code>git log --oneline</code></strong> —— 快速查看历史</li>
+</ol>
+<p>多练习，尤其是 <code>git reset</code> 的各种模式，这是本地版本控制的核心技能。</p>
+<hr>
+<p><em>Happy Coding with Git! 🎉</em></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">wsy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.wsy.xx.kg/2026/07/19/git_tutorial/">https://blog.wsy.xx.kg/2026/07/19/git_tutorial/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.wsy.xx.kg" target="_blank">zero blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/pixel/05.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2026/07/14/XDS110%20%E8%A2%AB%E8%AF%86%E5%88%AB%E6%88%90%20Stellaris%20Device%20Firmware%20Upgrade%20%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"><img class="next-cover" src="/img/pixel/11.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">XDS110 被识别成 Stellaris Device Firmware Upgrade 的解决方法</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/./img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">wsy</div><div class="author-info__description">记录学习笔记和一些小技术</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git-%E6%9C%AC%E5%9C%B0%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%AE%8C%E5%85%A8%E6%95%99%E7%A8%8B"><span class="toc-text">Git 本地版本控制完全教程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Git-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="toc-text">1. Git 安装与配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%AE%89%E8%A3%85-Git"><span class="toc-text">1.1 安装 Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%EF%BC%88%E5%BF%85%E9%A1%BB%EF%BC%89"><span class="toc-text">1.2 配置用户信息（必须）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E9%85%8D%E7%BD%AE%E9%BB%98%E8%AE%A4%E7%BC%96%E8%BE%91%E5%99%A8%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="toc-text">1.3 配置默认编辑器（可选）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BB%93%E5%BA%93"><span class="toc-text">2. 初始化仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-text">3. 基本工作流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%88%B0%E6%9A%82%E5%AD%98%E5%8C%BA"><span class="toc-text">3.1 添加文件到暂存区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E6%8F%90%E4%BA%A4%E6%9B%B4%E6%94%B9%E5%88%B0%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93"><span class="toc-text">3.2 提交更改到本地仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%AE%9E%E6%93%8D%E7%BB%83%E4%B9%A0"><span class="toc-text">3.3 实操练习</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9F%A5%E7%9C%8B%E7%8A%B6%E6%80%81%E4%B8%8E%E5%8E%86%E5%8F%B2"><span class="toc-text">4. 查看状态与历史</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E7%8A%B6%E6%80%81"><span class="toc-text">4.1 查看当前状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E6%9F%A5%E7%9C%8B%E4%BF%AE%E6%94%B9%E5%86%85%E5%AE%B9"><span class="toc-text">4.2 查看修改内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2"><span class="toc-text">4.3 查看提交历史</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E6%9F%A5%E7%9C%8B%E6%9F%90%E4%B8%AA%E6%8F%90%E4%BA%A4%E8%AF%A6%E6%83%85"><span class="toc-text">4.4 查看某个提交详情</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E4%BB%A3%E7%A0%81%E5%9B%9E%E9%80%80%EF%BC%88%E6%A0%B8%E5%BF%83%EF%BC%89"><span class="toc-text">5. 代码回退（核心）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E5%9B%9E%E9%80%80%E5%88%B0%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%EF%BC%88%E4%BF%9D%E7%95%99%E4%BF%AE%E6%94%B9%EF%BC%89"><span class="toc-text">5.1 回退到指定版本（保留修改）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E5%9B%9E%E9%80%80%E5%88%B0%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%EF%BC%88%E4%B8%A2%E5%BC%83%E6%9A%82%E5%AD%98%E5%8C%BA%EF%BC%89"><span class="toc-text">5.2 回退到指定版本（丢弃暂存区）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E5%9B%9E%E9%80%80%E5%88%B0%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%EF%BC%88%E5%AE%8C%E5%85%A8%E4%B8%A2%E5%BC%83%E4%BF%AE%E6%94%B9%EF%BC%89%E2%9A%A0%EF%B8%8F"><span class="toc-text">5.3 回退到指定版本（完全丢弃修改）⚠️</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-%E5%9B%9E%E9%80%80%E5%88%B0%E6%8C%87%E5%AE%9A-commit-ID"><span class="toc-text">5.4 回退到指定 commit ID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-%E5%9B%9E%E9%80%80%E5%90%8E%E5%90%8E%E6%82%94%E4%BA%86%EF%BC%9F%E7%94%A8-reflog-%E6%89%BE%E5%9B%9E%EF%BC%81"><span class="toc-text">5.5 回退后后悔了？用 reflog 找回！</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-6-%E6%92%A4%E9%94%80%E5%B7%A5%E4%BD%9C%E5%8C%BA%E7%9A%84%E4%BF%AE%E6%94%B9%EF%BC%88%E6%9C%AA-add%EF%BC%89"><span class="toc-text">5.6 撤销工作区的修改（未 add）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-7-%E6%92%A4%E9%94%80%E6%9A%82%E5%AD%98%E5%8C%BA%E7%9A%84%E4%BF%AE%E6%94%B9%EF%BC%88%E5%B7%B2-add-%E6%9C%AA-commit%EF%BC%89"><span class="toc-text">5.7 撤销暂存区的修改（已 add 未 commit）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-8-%E4%BF%AE%E6%94%B9%E6%9C%80%E5%90%8E%E4%B8%80%E6%AC%A1%E6%8F%90%E4%BA%A4"><span class="toc-text">5.8 修改最后一次提交</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-9-%E5%9B%9E%E9%80%80%E5%AE%9E%E6%93%8D%E7%BB%83%E4%B9%A0"><span class="toc-text">5.9 回退实操练习</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="toc-text">6. 分支管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E5%88%9B%E5%BB%BA%E4%B8%8E%E5%88%87%E6%8D%A2%E5%88%86%E6%94%AF"><span class="toc-text">6.1 创建与切换分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF"><span class="toc-text">6.2 合并分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-%E5%88%A0%E9%99%A4%E5%88%86%E6%94%AF"><span class="toc-text">6.3 删除分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-%E5%82%A8%E8%97%8F%E4%B8%B4%E6%97%B6%E4%BF%AE%E6%94%B9%EF%BC%88Stash%EF%BC%89"><span class="toc-text">6.4 储藏临时修改（Stash）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%A0%87%E7%AD%BE%E4%B8%8E%E9%87%8C%E7%A8%8B%E7%A2%91"><span class="toc-text">7. 标签与里程碑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E6%92%A4%E9%94%80%E4%B8%8E%E6%B8%85%E7%90%86"><span class="toc-text">8. 撤销与清理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-%E6%B8%85%E7%90%86%E6%9C%AA%E8%B7%9F%E8%B8%AA%E6%96%87%E4%BB%B6"><span class="toc-text">8.1 清理未跟踪文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E5%8F%98%E5%8C%96"><span class="toc-text">8.2 忽略文件权限变化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="toc-text">9. 常用命令速查表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/07/19/git_tutorial/" title="git版本控制"><img src="/img/pixel/05.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="git版本控制"/></a><div class="content"><a class="title" href="/2026/07/19/git_tutorial/" title="git版本控制">git版本控制</a><time datetime="2026-07-19T06:12:08.000Z" title="发表于 2026-07-19 14:12:08">2026-07-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/14/XDS110%20%E8%A2%AB%E8%AF%86%E5%88%AB%E6%88%90%20Stellaris%20Device%20Firmware%20Upgrade%20%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="XDS110 被识别成 Stellaris Device Firmware Upgrade 的解决方法"><img src="/img/pixel/11.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="XDS110 被识别成 Stellaris Device Firmware Upgrade 的解决方法"/></a><div class="content"><a class="title" href="/2026/07/14/XDS110%20%E8%A2%AB%E8%AF%86%E5%88%AB%E6%88%90%20Stellaris%20Device%20Firmware%20Upgrade%20%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="XDS110 被识别成 Stellaris Device Firmware Upgrade 的解决方法">XDS110 被识别成 Stellaris Device Firmware Upgrade 的解决方法</a><time datetime="2026-07-14T09:43:08.000Z" title="发表于 2026-07-14 17:43:08">2026-07-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/05/21/apk%E7%AD%BE%E5%90%8D/" title="apk签名"><img src="/img/pixel/05.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="apk签名"/></a><div class="content"><a class="title" href="/2026/05/21/apk%E7%AD%BE%E5%90%8D/" title="apk签名">apk签名</a><time datetime="2026-05-21T02:29:08.000Z" title="发表于 2026-05-21 10:29:08">2026-05-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/02/02/%E7%8B%BC%E8%9B%9BF75%20%E8%AF%B4%E6%98%8E%E4%B9%A6/" title="无题"><img src="/img/pixel/01.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2026/02/02/%E7%8B%BC%E8%9B%9BF75%20%E8%AF%B4%E6%98%8E%E4%B9%A6/" title="无题">无题</a><time datetime="2026-02-01T16:37:46.412Z" title="发表于 2026-02-02 00:37:46">2026-02-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/11/15/ps%E7%AC%94%E8%AE%B0/" title="无题"><img src="/img/pixel/13.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2025/11/15/ps%E7%AC%94%E8%AE%B0/" title="无题">无题</a><time datetime="2025-11-15T11:13:58.809Z" title="发表于 2025-11-15 19:13:58">2025-11-15</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2026 By wsy</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
